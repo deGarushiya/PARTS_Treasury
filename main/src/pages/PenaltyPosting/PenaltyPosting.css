@@ -1,0 +1,463 @@
+/* Main Container */
+.all.card {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Top Panel */
+.top-panel {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 20px;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+  padding: 20px 25px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.top-panel > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.top-panel label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.date-input {
+  width: 160px;
+  height: 34px;
+  padding: 6px 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 14px;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+.radio-row {
+  display: flex;
+  gap: 40px !important; /* Increased spacing between radio buttons */
+  justify-content: center;
+  padding: 0 15px;
+}
+
+.radio-row label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #495057;
+  transition: color 0.2s;
+}
+
+.radio-row label:hover {
+  color: #0d6efd;
+}
+
+.radio-row input[type="radio"] {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+/* Barangay Fieldset */
+.top-panel form {
+  margin: 0;
+  justify-self: end;
+}
+
+.top-panel fieldset {
+  border: 1px solid #adb5bd;
+  border-radius: 5px;
+  padding: 5px 15px 10px;
+  margin: 0;
+  background: #fff;
+}
+
+.top-panel legend {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 8px;
+  color: #495057;
+}
+
+.top-panel select {
+  width: 260px !important; /* Adjusted width to fit closer to fieldset edge */
+  height: 34px;
+  padding: 6px 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 14px;
+  margin: 0;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.top-panel select:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+.top-panel select:disabled {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+  opacity: 0.6;
+  color: #6c757d;
+}
+
+/* Result Table Container */
+.result-table {
+  flex: 1;
+  overflow: auto;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  min-height: 0;
+  position: relative;
+}
+
+.result-table table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Fixed layout for consistent column widths */
+}
+
+.result-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.result-table th {
+  background: #e9ecef;
+  border: 1px solid #ddd;
+  border-top: none; /* Remove top border for first row */
+  padding: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center; /* Center align headers */
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.result-table td {
+  border: 1px solid #ddd;
+  padding: 6px 8px;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 0; /* Enable ellipsis properly */
+}
+
+.result-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Specific column widths */
+.result-table th:nth-child(1),
+.result-table td:nth-child(1) {
+  width: 150px;
+  max-width: 150px;
+  min-width: 150px;
+}
+
+.result-table th:nth-child(2),
+.result-table td:nth-child(2) {
+  width: 80px;
+  max-width: 80px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.result-table th:nth-child(3),
+.result-table td:nth-child(3) {
+  width: 300px;
+  max-width: 300px;
+  min-width: 300px;
+}
+
+.result-table th:nth-child(4),
+.result-table td:nth-child(4) {
+  width: 200px;
+  max-width: 200px;
+  min-width: 200px;
+}
+
+.result-table th:nth-child(5),
+.result-table td:nth-child(5) {
+  width: 100px;
+  max-width: 100px;
+  min-width: 100px;
+  text-align: center;
+}
+
+/* Footer Section */
+.footer-section {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 12px 15px;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.footer-section > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.footer-section button {
+  padding: 8px 16px;
+  min-width: 120px;
+  border: none;
+  border-radius: 4px;
+  background: #0d6efd;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+
+.footer-section button:hover:not(:disabled) {
+  background: #0b5ed7;
+}
+
+.footer-section button:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Status Bar */
+.footer-section .status-bar {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  background: #f8f9fa;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #333;
+  text-align: left;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  border-radius: 6px;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #e0e0e0;
+  border-top: 5px solid #0d6efd;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #0d6efd;
+}
+
+/* Completion Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.completion-modal {
+  background: white;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.completion-modal-header {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.completion-modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.completion-modal-header .close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.completion-modal-header .close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.completion-modal-body {
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+}
+
+.completion-modal-footer {
+  padding: 15px 20px;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: center;
+}
+
+.completion-modal-footer button {
+  padding: 8px 30px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: background-color 0.2s;
+}
+
+.completion-modal-footer button:hover {
+  background: #0b5ed7;
+}
+
+/* Progress info text - shown above top panel */
+.progress-info {
+  background: #f0f8ff;
+  border: 1px solid #4a90e2;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #2c5aa0;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Footer Layout - Horizontal with progress bar */
+.footer-layout {
+  display: grid;
+  grid-template-columns: 100px 1fr 100px 100px;
+  gap: 15px;
+  align-items: center;
+}
+
+.footer-btn {
+  height: 36px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Progress Container - holds either progress bar or status text */
+.progress-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* Visual Progress Bar */
+.progress-bar-container {
+  width: 100%;
+  height: 25px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
+  transition: width 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+}

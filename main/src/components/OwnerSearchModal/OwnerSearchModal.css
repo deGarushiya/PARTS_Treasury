@@ -1,0 +1,402 @@
+.modal-overlay {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.modal-content {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 1100px;
+  max-height: 90vh;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  overflow: hidden;
+}
+
+.modal-title {
+  background: linear-gradient(to bottom, #4a90e2, #357abd);
+  color: white;
+  padding: 12px 20px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title span {
+  flex: 1;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s;
+  padding: 0;
+  line-height: 1;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-body-content {
+  padding: 20px;
+  flex: 1;
+  overflow: auto;
+}
+
+.ownersearch-top {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+/* Form area */
+.form-area {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.form-row label {
+  flex: 0 0 140px;
+  font-size: 13px;
+}
+
+.form-row input {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-row.two-col > div {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-row.full-width {
+  display: flex;
+}
+
+/* Selected row highlight */
+.results-table tr.selected-row {
+  background-color: #b3d4fc !important;
+}
+
+.results-table tr.selected-row:hover {
+  background-color: #b3d4fc !important;
+}
+
+.results-table tr.selected-row td {
+  background-color: #b3d4fc !important;
+}
+
+.results-table tr.selected-row td:hover {
+  background-color: #b3d4fc !important;
+}
+
+/* Additional specificity for selected row */
+.modal-content .results-table tr.selected-row {
+  background-color: #b3d4fc !important;
+}
+
+.modal-content .results-table tr.selected-row td {
+  background-color: #b3d4fc !important;
+}
+
+
+/* Sidebar Controls */
+.sidebar-controls {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-controls button {
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  background: #0d6efd;
+  color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.sidebar-controls button.disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.checkbox-row {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+/* Results Table (scrollable area) */
+
+th {
+  cursor: pointer;
+  user-select: none;
+}
+
+th.sorted-asc::after {
+  content: " ▲";
+  font-size: 12px;
+  color: #0d6efd;
+}
+
+th.sorted-desc::after {
+  content: " ▼";
+  font-size: 12px;
+  color: #0d6efd;
+}
+
+.results-table {
+  flex: 1;
+  margin-top: 10px;
+  overflow-y: auto;       /* vertical scroll */
+  overflow-x: auto;       /* horizontal scroll */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.results-table table {
+  width: 100%;
+  min-width: 800px;       /* force horizontal scroll if narrow */
+  border-collapse: collapse;
+}
+
+.results-table th,
+.results-table td {
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid #ddd;
+  padding: 6px;
+  font-size: 13px;
+  white-space: nowrap;    /* keep cells from wrapping */
+}
+
+.results-table th {
+  background: #f2f2f2;
+  position: sticky;
+  top: 0;                 /* keep header visible while scrolling */
+  z-index: 2;
+}
+
+.results-table tr:hover:not(.selected-row) {
+  background: #eef6ff;
+  cursor: pointer;
+}
+
+.results-table td:hover:not(.selected-row td) {
+  background-color: #f1f8ff;
+}
+
+
+/* No Results Modal */
+.no-results-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.no-results-modal {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.no-results-modal p {
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+
+.no-results-modal button {
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+
+/* ===  Responsive Behavior === */
+@media (max-width: 1024px) {
+  .modal-content {
+    width: 95%;
+    max-width: 1000px;
+    padding: 15px;
+  }
+
+  .ownersearch-top {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .sidebar-controls {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .sidebar-controls button {
+    flex: 1 1 30%;
+    min-width: 120px;
+  }
+
+  .results-table {
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 98%;
+    padding: 10px;
+    max-height: 95vh;
+  }
+
+  .modal-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .form-row.two-col {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-row.two-col > div {
+    width: 100%;
+  }
+
+  .form-row label {
+    flex: 0 0 120px;
+    font-size: 12px;
+  }
+
+  .form-row input {
+    padding: 4px;
+    font-size: 12px;
+  }
+
+  .sidebar-controls {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .sidebar-controls button {
+    width: 100%;
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .checkbox-row {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+  .results-table {
+    max-height: 250px;
+  }
+
+  .results-table table {
+    min-width: 600px;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 4px;
+    font-size: 11px;
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    padding: 8px;
+  }
+
+  .modal-title {
+    font-size: 14px;
+  }
+
+  .form-row label {
+    flex: 0 0 100px;
+    font-size: 11px;
+  }
+
+  .form-row input {
+    padding: 3px;
+    font-size: 11px;
+  }
+
+  .sidebar-controls button {
+    padding: 5px;
+    font-size: 11px;
+  }
+
+  .results-table {
+    max-height: 200px;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 3px;
+    font-size: 10px;
+    max-width: 100px;
+  }
+}

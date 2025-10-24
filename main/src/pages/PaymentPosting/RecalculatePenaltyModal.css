@@ -1,0 +1,177 @@
+/* Recalculate Penalty Modal Backdrop */
+.recalc-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* Modal Container */
+.recalc-modal {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  width: 450px;
+  max-width: 90%;
+  overflow: hidden;
+}
+
+/* Header */
+.recalc-header {
+  background: linear-gradient(to bottom, #4a90e2, #357abd);
+  color: white;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recalc-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.recalc-close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.recalc-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Body */
+.recalc-body {
+  padding: 20px;
+}
+
+.recalc-section {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  background: #f9f9f9;
+  margin-bottom: 20px;
+}
+
+.recalc-section h4 {
+  margin: 0 0 15px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Input Fields */
+.recalc-inputs {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.recalc-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.recalc-field label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  min-width: 50px;
+}
+
+.recalc-field select,
+.recalc-field input[type="number"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  min-width: 150px;
+  background: white;
+}
+
+.recalc-field input[type="number"] {
+  min-width: 100px;
+  text-align: center;
+}
+
+.recalc-field select:focus,
+.recalc-field input[type="number"]:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+/* Actions */
+.recalc-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.recalc-ok-btn {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px 40px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-transform: uppercase;
+}
+
+.recalc-ok-btn:hover {
+  background: #357abd;
+}
+
+.recalc-ok-btn:active {
+  background: #2a5f8f;
+  transform: translateY(1px);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .recalc-modal {
+    width: 95%;
+  }
+
+  .recalc-inputs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .recalc-field {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .recalc-field label {
+    min-width: auto;
+  }
+
+  .recalc-field select,
+  .recalc-field input[type="number"] {
+    width: 100%;
+  }
+}
+
+

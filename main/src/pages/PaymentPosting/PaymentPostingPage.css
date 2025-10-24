@@ -1,0 +1,462 @@
+.payment-posting-container {
+  display: grid;
+  grid-template-areas:
+    "journal payment-info"
+    "journal details"
+    "bottom bottom";
+  grid-template-columns: 40% 60%;
+  grid-template-rows: 1fr 1fr auto;
+  gap: 15px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+/* Journal Section */
+.journal-section {
+  grid-area: journal;
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  padding: 15px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  transition: box-shadow 0.3s ease;
+  height: 100%;
+  min-height: 400px;
+}
+
+.journal-section:hover {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.journal-section h4 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  flex-shrink: 0; /* prevent header from shrinking */
+}
+
+.journal-section .table-wrapper {
+  overflow-y: auto;          /* vertical scroll only */
+  overflow-x: auto;          /* horizontal scroll if needed */
+  flex: 1;                   /* take remaining space in flex container */
+  min-height: 0;             /* allow flex item to shrink */
+  position: relative;
+}
+
+.journal-section .table-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.journal-section .table-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.journal-section .table-wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.journal-section .table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.journal-section table {
+  min-width: 1000px;        /* ensures scrollbar appears if table is wide */
+  border-collapse: collapse;
+  width: max-content;       /* shrink to fit columns */
+}
+
+.journal-section thead th {
+  position: sticky;
+  top: 0;
+  background: #f1f1f1;
+  z-index: 2;
+}
+
+.journal-section .table-wrapper table {
+  min-width: 1000px;        /* force horizontal scroll if needed */
+}
+
+.table-wrapper.fixed-header table {
+  min-width: 900px; /* Ensure scrollbar appears if columns exceed width */
+}
+
+.table-wrapper.fixed-header thead th {
+  position: sticky;
+  top: 0;
+  background: #f1f1f1;
+  z-index: 2;
+}
+
+/* Journal table fixed header with horizontal scroll at bottom
+.table-wrapper.fixed-header {
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: auto;
+} */
+
+/* Selected row highlight */
+.selected-row {
+  background: linear-gradient(90deg, #e3f2fd 0%, #bbdefb 100%) !important;
+  border-left: 4px solid #2196f3 !important;
+  transform: scale(1.01);
+  transition: all 0.2s ease;
+}
+
+
+/* Arrow column */
+.arrow-col {
+  width: 25px;
+  text-align: center;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Checkbox column center */
+.journal-section td input[type="checkbox"] {
+  display: block;
+  margin: auto;
+}
+
+
+
+
+/* Payment Info Section */
+.payment-info-section {
+  grid-area: payment-info;
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+  height: 350px;
+  transition: box-shadow 0.3s ease;
+}
+
+.payment-info-section:hover {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.payment-info-section h4 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.payment-info-section .form-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr 80px 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.payment-info-section .form-grid label {
+  font-size: 13px;
+  color: #555;
+}
+
+.payment-info-section .form-grid input,
+.payment-info-section .form-grid select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  width: 100%;
+  transition: all 0.3s ease;
+  background: #fafbfc;
+}
+
+.payment-info-section .form-grid input:focus,
+.payment-info-section .form-grid select:focus {
+  outline: none;
+  border-color: #3498db;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.payment-info-section .form-grid input[type="checkbox"] {
+  width: auto;
+  transform: scale(1.1);
+}
+
+.payment-info-section .form-grid .full-width {
+  grid-column: span 3;
+}
+
+.payment-info-section .form-grid select.format-select {
+  width: 100px;
+}
+
+.format-group {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.format-group label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: #555;
+  white-space: nowrap;
+}
+
+/* Details Section */
+.details-section {
+  grid-area: details;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.details-section h4 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  flex-shrink: 0; /* prevent header from shrinking */
+}
+
+.details-section .table-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #e1e5e9;
+  padding: 12px 8px;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+th {
+  background: #f1f1f1;
+  color: #333;
+  text-align: left;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+td {
+  background: #fff;
+}
+
+tr:hover td {
+  background: #f8f9fa;
+}
+
+.total-amount {
+  margin-top: 15px;
+  padding: 15px;
+  text-align: right;
+  font-weight: bold;
+  font-size: 16px;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  border-radius: 8px;
+  border: 2px solid #ff9a56;
+  color: #d35400;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0; /* prevent total amount from shrinking */
+}
+
+/* Bottom Controls */
+.bottom-controls {
+  grid-area: bottom;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  margin-right: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  transition: box-shadow 0.3s ease;
+}
+
+.bottom-controls:hover {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bottom-left .top-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bottom-left .button-row {
+  display: flex;
+  gap: 6px;
+}
+
+.bottom-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bottom-controls button {
+  padding: 5px 10px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.bottom-controls button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.bottom-controls button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-controls button.btn-primary {
+  background: #0d6efd;
+}
+
+.bottom-controls button.btn-primary:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.bottom-controls button.btn-danger {
+  background: #dc3545;
+}
+
+.bottom-controls button.btn-danger:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+.bottom-controls button.btn-warning {
+  background: #ffc107;
+  color: #000;
+}
+
+.bottom-controls button.btn-warning:hover:not(:disabled) {
+  background-color: #e0a800;
+}
+
+.bottom-controls button.btn-success {
+  background: #198754;
+}
+
+.bottom-controls button.btn-success:hover:not(:disabled) {
+  background-color: #157347;
+}
+
+.bottom-controls button.disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.bottom-controls input[type="date"] {
+  padding: 3px;
+}
+
+
+button:disabled,
+.disabled-btn {
+  background-color: #ccc !important;
+  color: #666 !important;
+  cursor: not-allowed;
+}
+
+
+
+/* Responsive layout */
+@media (max-width: 992px) {
+  .payment-posting-container {
+    grid-template-areas:
+      "journal"
+      "payment-info"
+      "details"
+      "bottom";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    min-height: 100vh; /* Ensure full height */
+  }
+
+  .bottom-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .bottom-left {
+    width: 100%;
+  }
+
+  .bottom-right {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: flex-start;
+  }
+
+  .bottom-left .top-row {
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .bottom-left .button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  /* Make all buttons align horizontally */
+  .bottom-left .button-row button,
+  .bottom-right button {
+    flex: 0 0 auto;
+    margin-bottom: 6px;
+  }
+}
+

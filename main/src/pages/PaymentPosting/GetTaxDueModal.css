@@ -1,0 +1,309 @@
+.gettaxdue-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* MODAL CONTAINER */
+.gettaxdue-modal {
+  background: #fff !important;
+  width: 98%;
+  height: 100%;
+  max-width: 1400px;
+  max-height: 95vh;
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.3s ease;
+  overflow: hidden;
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: translateY(-50px) scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* HEADER */
+.gettaxdue-modal .modal-header {
+  background: linear-gradient(to bottom, #4a90e2, #357abd);
+  color: white;
+  padding: 12px 20px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.gettaxdue-modal .modal-header h3 {
+  margin: 0;
+  flex: 1;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+}
+
+.gettaxdue-modal .modal-header .close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;                
+  justify-content: center;      
+  align-items: center;          
+  border-radius: 4px;
+  padding: 0;
+  line-height: 1;               
+  transition: background 0.2s;
+}
+
+.gettaxdue-modal .modal-header .close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+
+/* BODY (2 COLUMNS) */
+.gettaxdue-modal .modal-body {
+  padding: 15px;
+  display: flex;
+  gap: 12px;
+  min-height: 0; /* allow children to flex and scroll within modal */
+}
+
+
+/* LEFT COLUMN */
+.left-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  min-height: 0; /* enable internal scrollers */
+}
+
+/* RIGHT COLUMN */
+.right-column {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* TAXPAYER INFO */
+.taxpayer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: #f7f7f7;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Upper properties table fixed size */
+.section:first-of-type .table-container {
+  overflow: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  height: 160px; /* fixed height */
+  white-space: nowrap;
+}
+
+/* Lower dues table grows to fill, scrolls */
+.section + .section {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1 1 auto;
+  margin-top: 12px; /* Add space between tables */
+}
+.section + .section .table-container {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto; /* both scrollbars */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.modern-table th,
+.modern-table td {
+  border: 1px solid #ddd;
+  padding: 6px 8px;
+  text-align: center;
+}
+
+.modern-table th {
+  background: #f5f5f5;
+}
+
+/* Utility classes */
+.center-text { text-align: center; }
+.clickable-row { cursor: pointer; }
+
+.selected-row {
+  background-color: #b3d4fc !important; /* Same blue as OwnerSearchModal */
+}
+
+.selected-row:hover {
+  background-color: #b3d4fc !important; /* Keep same color on hover */
+}
+
+.selected-row td {
+  background-color: #b3d4fc !important;
+}
+
+.selected-row td:hover {
+  background-color: #b3d4fc !important;
+}
+
+/* Checkbox column - fixed width to prevent layout shift */
+.checkbox-column {
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  text-align: center !important;
+  padding: 4px !important;
+  vertical-align: middle !important;
+}
+
+.checkbox-column input[type="checkbox"] {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Table header checkbox */
+thead .checkbox-column input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+/* BUTTON STYLES */
+.blue-btn {
+  background: #0d6efd !important;
+  color: white !important;
+  border: none !important;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+  width: 120px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blue-btn:hover {
+  background: #0056b3 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* BUTTON GROUPS */
+
+.top-buttons,
+.bottom-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+
+/* TOTAL AMOUNT DUE */
+/* Totals Section */
+.totals-section {
+  margin-top: 2px;
+  padding: 8px;
+  background: #f5f7fa;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  flex: 0 0 auto; /* keep at bottom below scroller */
+}
+
+.total-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 12px;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #e1e5e9;
+  gap: 20px;
+}
+
+.total-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.total-values {
+  display: flex;
+  gap: 80px;
+  align-items: center;
+}
+
+.total-value {
+  font-weight: bold;
+  font-size: 16px;
+  color: #1976d2;
+  font-family: 'Courier New', monospace;
+  min-width: 120px;
+  text-align: right;
+}
+
+.total-value.selected-total {
+  color: #0d47a1;
+  font-size: 17px;
+}
+
+/* Text alignment utilities */
+.text-right {
+  text-align: right !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-left {
+  text-align: left !important;
+}

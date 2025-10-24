@@ -65,17 +65,21 @@ function App() {
     };
   }, []);
 
-  const token = localStorage.getItem('auth_token');
+  // TEMPORARILY DISABLED - Will use Assessor's authentication
+  // const token = localStorage.getItem('auth_token');
+  const token = true; // Bypass auth for integration testing
 
   return (
     <Router>
-      {token && <Navbar />}
-      <div style={{ marginTop: token ? "0px" : "0", minHeight: "100vh" }}>
+      <Navbar />
+      <div style={{ marginTop: "0px", minHeight: "100vh" }}>
         <Routes>
+          {/* Login route available but not required */}
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/" element={<ProtectedRoute><PaymentPostingPage /></ProtectedRoute>} />
-          <Route path="/manual-debit" element={<ProtectedRoute><ManualDebitPage /></ProtectedRoute>} />
-          <Route path="/penalty-posting" element={<ProtectedRoute><PenaltyPosting /></ProtectedRoute>} />
+          {/* All routes accessible without login (for Assessor integration) */}
+          <Route path="/" element={<PaymentPostingPage />} />
+          <Route path="/manual-debit" element={<ManualDebitPage />} />
+          <Route path="/penalty-posting" element={<PenaltyPosting />} />
         </Routes>
       </div>
     </Router>

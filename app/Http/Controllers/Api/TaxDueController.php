@@ -19,6 +19,11 @@ class TaxDueController extends Controller
     // 🔹 Fetch list of properties by LOCAL_TIN
 public function getProperties($localTin)
 {
+    // Validate LOCAL_TIN format
+    if (!preg_match('/^\d{13}$/', $localTin)) {
+        return response()->json(['error' => 'Invalid LOCAL_TIN format'], 400);
+    }
+
     try {
         $properties = DB::table('propertyowner as po')
             ->join('rptassessment as ra', 'po.PROP_ID', '=', 'ra.PROP_ID')
@@ -346,9 +351,21 @@ public function getProperties($localTin)
     // 🔹 Compute PEN - Calculate penalties/discounts
     public function computePenaltyDiscount(Request $request, $localTin)
     {
+        // Validate input
+        $validated = $request->validate([
+            'posting_date' => 'nullable|date',
+            'posting_month' => 'nullable|integer|min:1|max:12',
+            'posting_year' => 'nullable|integer|min:1900|max:2100',
+        ]);
+
+        // Validate LOCAL_TIN format
+        if (!preg_match('/^\d{13}$/', $localTin)) {
+            return response()->json(['error' => 'Invalid LOCAL_TIN format'], 400);
+        }
+
         try {
             // Get posting date from request (default to current date)
-            $postingDate = $request->input('posting_date', now());
+            $postingDate = $validated['posting_date'] ?? now();
             $postingYear = date('Y', strtotime($postingDate));
             $postingMonth = date('n', strtotime($postingDate));
 

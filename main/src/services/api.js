@@ -1,11 +1,39 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api',
+  baseURL: process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000/api',
   headers: {
     'Content-Type': 'application/json'
   }
 });
+
+// Add request interceptor to include auth token
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('auth_token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Add response interceptor to handle auth errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Unauthorized - clear token and redirect to login
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('user');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
 
 // Payment API functions
 export const paymentAPI = {
@@ -74,6 +102,21 @@ export const propertyAPI = {
 export const barangayAPI = {
   // Get all barangays
   getAll: () => api.get('/barangays')
+};
+
+// Auth API functions
+export const authAPI = {
+  // Login
+  login: (email, password) => api.post('/login', { email, password }),
+  
+  // Logout
+  logout: () => api.post('/logout'),
+  
+  // Get current user
+  me: () => api.get('/me'),
+  
+  // Register new user (admin only)
+  register: (userData) => api.post('/register', userData)
 };
 
 export default api;

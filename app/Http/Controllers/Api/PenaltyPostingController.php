@@ -15,10 +15,17 @@ class PenaltyPostingController extends Controller
      */
     public function getPenaltyRecords(Request $request)
     {
+        // Validate input
+        $validated = $request->validate([
+            'barangay' => 'nullable|string|max:100',
+            'taxyear' => 'nullable|integer|min:1900|max:2100',
+            'tdno' => 'nullable|string|max:50',
+        ]);
+
         try {
-            $barangay = $request->query('barangay');
-            $taxYear = $request->query('taxyear');
-            $tdno = $request->query('tdno');
+            $barangay = $validated['barangay'] ?? null;
+            $taxYear = $validated['taxyear'] ?? null;
+            $tdno = $validated['tdno'] ?? null;
 
             Log::info('📋 Fetching penalty records', [
                 'barangay' => $barangay,
@@ -94,13 +101,19 @@ class PenaltyPostingController extends Controller
      */
     public function postPenalties(Request $request)
     {
+        // Validate input
+        $validated = $request->validate([
+            'asOfDate' => 'required|string',
+            'records' => 'required|array|min:1',
+            'records.*.TAXTRANS_ID' => 'required',
+            'records.*.LOCAL_TIN' => 'required|string|max:20',
+            'records.*.PROP_ID' => 'required',
+            'records.*.TAXYEAR' => 'required|integer|min:1900|max:2100',
+        ]);
+
         try {
-            $records = $request->input('records'); // Array of records from frontend
-            $asOfDate = $request->input('asOfDate'); // Date picker value (YYYY-MM format)
-            
-            if (!$records || count($records) === 0) {
-                return response()->json(['error' => 'No records to process'], 400);
-            }
+            $records = $validated['records'];
+            $asOfDate = $validated['asOfDate'];
 
             Log::info('🚀 Starting penalty posting', [
                 'record_count' => count($records),

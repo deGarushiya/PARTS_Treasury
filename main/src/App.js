@@ -1,11 +1,21 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import PaymentPostingPage from "./pages/PaymentPosting/PaymentPostingPage";
 import ManualDebitPage from "./pages/ManualDebit/ManualDebitPage";
 import PenaltyPosting from "./pages/PenaltyPosting/PenaltyPosting";
+import LoginPage from "./pages/Login/LoginPage";
 import "./components/Navbar.css";
 import "./styles/custom-styles.css";
+
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('auth_token');
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
 
 function App() {
   // 🔹 Global uppercase handler for all text inputs
@@ -55,14 +65,17 @@ function App() {
     };
   }, []);
 
+  const token = localStorage.getItem('auth_token');
+
   return (
     <Router>
-      <Navbar />
-      <div style={{ marginTop: "0px", minHeight: "100vh" }}>
+      {token && <Navbar />}
+      <div style={{ marginTop: token ? "0px" : "0", minHeight: "100vh" }}>
         <Routes>
-          <Route path="/" element={<PaymentPostingPage />} />
-          <Route path="/manual-debit" element={<ManualDebitPage />} />
-          <Route path="/penalty-posting" element={<PenaltyPosting />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<ProtectedRoute><PaymentPostingPage /></ProtectedRoute>} />
+          <Route path="/manual-debit" element={<ProtectedRoute><ManualDebitPage /></ProtectedRoute>} />
+          <Route path="/penalty-posting" element={<ProtectedRoute><PenaltyPosting /></ProtectedRoute>} />
         </Routes>
       </div>
     </Router>

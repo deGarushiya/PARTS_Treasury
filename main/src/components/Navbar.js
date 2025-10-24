@@ -1,8 +1,24 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { authAPI } from "../services/api";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+  const handleLogout = async () => {
+    try {
+      await authAPI.logout();
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('user');
+      navigate('/login');
+    }
+  };
+
   return (
     <nav className="navbar">
       <ul>
@@ -46,6 +62,10 @@ const Navbar = () => {
           >
             Reports
           </NavLink>
+        </li>
+        <li className="navbar-right">
+          <span className="user-info">{user.name} ({user.role})</span>
+          <button onClick={handleLogout} className="logout-btn">Logout</button>
         </li>
       </ul>
     </nav>
